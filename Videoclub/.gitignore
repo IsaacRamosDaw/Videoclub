@@ -1,0 +1,28 @@
+# El directorio de compilación principal de Maven (contiene los JARs y clases)
+/target/
+
+# Archivos de caché de Maven (no es necesario compartir)
+.m2/repository/
+
+# La carpeta NetBeans almacena archivos de configuración específicos de tu IDE y usuario
+/nbproject/private/
+# Archivos de caché del IDE
+/build/
+# Archivos de configuración de NetBeans (a veces no deben compartirse si usas diferentes IDEs)
+# Si solo usas NetBeans, puedes ignorar el directorio completo, pero es más seguro ignorar solo la parte privada.
+
+*.orig
+*.swp
+*.bak
+*.o
+*.obj
+
+# Archivos de clase compilados
+*.class
+
+# Logs generados por la aplicación
+*.log
+
+# 4. BASES DE DATOS Y CONECTORES MANUALES (Si no se usan)
+# Si tienes un archivo JAR copiado manualmente en /lib u otra carpeta (lo que acabamos de evitar con Maven)
+/lib/*.jar
