@@ -8,6 +8,6 @@ package com.mycompany.videoclub.DAO.Interfaces;
  *
  * @author isaac
  */
-public interface Alquileres {
+public interface IAlquiler {
     
 }

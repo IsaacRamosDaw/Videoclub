@@ -4,6 +4,9 @@
 
 package com.mycompany.videoclub;
 
+import com.mycompany.videoclub.DAO.AppTest;
+import com.mycompany.videoclub.DAO.BaseDatos; // 💡 Importa la clase de utilidad
+
 /**
  *
  * @author isaac
@@ -11,6 +14,5 @@ package com.mycompany.videoclub;
 public class Videoclub {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
     }
 }

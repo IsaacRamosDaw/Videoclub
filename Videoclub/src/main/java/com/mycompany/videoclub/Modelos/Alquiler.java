@@ -8,6 +8,6 @@ package com.mycompany.videoclub.Modelos;
  *
  * @author isaac
  */
-public class Alquileres {
+public class Alquiler {
     
 }

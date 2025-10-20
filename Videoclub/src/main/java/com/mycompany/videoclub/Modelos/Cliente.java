@@ -8,7 +8,7 @@ package com.mycompany.videoclub.Modelos;
  *
  * @author isaac
  */
-public class Clientes {
+public class Cliente {
   private Integer id;
   private String dni;
   private String nombre;
@@ -16,17 +16,16 @@ public class Clientes {
   private String telefono;
   private Categoria categoria;
 
-  public Clientes(Integer id, String nombre, String apellidos, String dni, String telefono, Categoria categoria ){
+  public Cliente(Integer id, String nombre, String apellidos, String dni, String telefono, Categoria categoria ){
     this.id = id;
     this.nombre = nombre;
     this.apellidos = apellidos;
     this.telefono = telefono;
     this.dni = dni;
-    this.telefono = telefono;
     this.categoria = categoria;
   }
 
-  public Clientes(String nombre, String apellidos, String dni, String telefono, Categoria categoria ){
+  public Cliente(String nombre, String apellidos, String dni, String telefono, Categoria categoria ){
     this.nombre = nombre;
     this.apellidos = apellidos;
     this.telefono = telefono;
@@ -35,11 +34,11 @@ public class Clientes {
     this.categoria = categoria;
   }
 
-  public Clientes(){
+  public Cliente(){
   }
   
 
-  enum Categoria {
+  public enum Categoria {
     Oro,
     Estandar
   }

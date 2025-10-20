@@ -4,20 +4,22 @@
  */
 package com.mycompany.videoclub.DAO.Interfaces;
 
-import com.mycompany.videoclub.Modelos.Clientes;
+import com.mycompany.videoclub.Modelos.Cliente;
 
 /**
  *
  * @author isaac
  */
-public interface IClientes {
-  public boolean agregarCliente(Clientes u);
+public interface ICliente {
+  public boolean agregarCliente(Cliente u);
 
   public String eliminarCliente(Integer id);
 
-  public boolean actualizarCliente(Integer id, Clientes u);
+  public boolean actualizarCliente(Integer id, Cliente u);
 
-  public Clientes listarClientes(String username);
+  public Cliente listarClientes(String username);
+
+  public Cliente[] listarAllClientes();
 
   public boolean validarCliente(String username);
 
