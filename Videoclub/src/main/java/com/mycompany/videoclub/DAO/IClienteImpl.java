@@ -21,38 +21,178 @@ import com.mycompany.videoclub.Modelos.Cliente;
 public class IClienteImpl implements ICliente {
 
   @Override
-  public boolean agregarCliente(Cliente u) {
-    throw new UnsupportedOperationException("Unimplemented method 'agregarCliente'");
+  public boolean createClient(String nombre, String apellidos, String dni, String telefono) {
+    String sql = "INSERT INTO cliente (nombre, apellidos, dni, telefono, categoria) VALUES (?, ?, ?, ?, 'Estandar')";
+    try (Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, nombre);
+      pstmt.setString(2, apellidos);
+      pstmt.setString(3, dni);
+      pstmt.setString(4, telefono);
+
+      int filasAfectadas = pstmt.executeUpdate();
+
+      return filasAfectadas > 0;
+
+    } catch (SQLException e) {
+      System.err.println("Error al crear cliente: " + e.getMessage());
+      e.printStackTrace();
+      return false;
+    }
   }
 
   @Override
-  public String eliminarCliente(Integer id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'eliminarCliente'");
+  public String deleteClient(Integer id) {
+    String sql = "DELETE FROM cliente WHERE id = ?";
+
+    try (Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setInt(1, id);
+
+      int filasAfectadas = pstmt.executeUpdate();
+
+      if (filasAfectadas > 0) {
+        return "Cliente con ID " + id + " eliminado correctamente.";
+      } else {
+        return "No se encontró ningún cliente con ID " + id + " para eliminar.";
+      }
+
+    } catch (SQLException e) {
+      System.err.println("Error al eliminar cliente: " + e.getMessage());
+      e.printStackTrace();
+      return "ERROR: Fallo al eliminar. Mensaje SQL: " + e.getMessage();
+    }
   }
 
   @Override
-  public boolean actualizarCliente(Integer id, Cliente u) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'actualizarCliente'");
+  public boolean updateClient(Integer id, String username, String apellidos, String dni, String telefono) {
+    String sql = "UPDATE cliente SET nombre = ?, apellidos = ?, dni = ?, telefono = ? WHERE id = ?";
+
+    try (Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, username);
+      pstmt.setString(2, apellidos);
+      pstmt.setString(3, dni);
+      pstmt.setString(4, telefono);
+      pstmt.setInt(5, id);
+
+      int filasAfectadas = pstmt.executeUpdate();
+
+      return filasAfectadas > 0;
+
+    } catch (SQLException e) {
+      System.err.println("Error al actualizar cliente: " + e.getMessage());
+      e.printStackTrace();
+      return false;
+    }
   }
 
   @Override
-  public Cliente listarClientes(String username) {
-    throw new UnsupportedOperationException("Unimplemented method 'listaCLIENTES'");
+  public boolean updateCategory(Integer id, String categoria) {
+    String sql = "UPDATE cliente SET categoria = ? WHERE id = ?";
 
+    try (Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, categoria);
+      pstmt.setInt(2, id);
+
+      int filasAfectadas = pstmt.executeUpdate();
+
+      return filasAfectadas > 0;
+
+    } catch (SQLException e) {
+      System.err.println("Error al actualizar cliente: " + e.getMessage());
+      e.printStackTrace();
+      return false;
+    }
   }
 
   @Override
-  public Cliente[] listarAllClientes() {
+  public Cliente getClient(String username) {
+    Cliente cliente = null;
+    String sql = "SELECT * FROM cliente where nombre = ?";
+
+    try (
+        Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, username);
+
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (rs.next()) {
+          cliente = new Cliente(
+              rs.getInt("id"),
+              rs.getString("nombre"),
+              rs.getString("apellidos"),
+              rs.getString("dni"),
+              rs.getString("telefono"),
+              Cliente.Categoria.valueOf(rs.getString("categoria")));
+        }
+      }
+
+    } catch (SQLException e) {
+      System.err.println("Error al obtener cliente por ID: " + e.getMessage());
+      e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+      System.err.println("Error de mapeo de categoría (Enum): " + e.getMessage());
+      e.printStackTrace();
+    }
+
+    if (cliente == null) {
+      System.err.println("El cliente devuelve null");
+    }
+
+    return cliente;
+  }
+
+  @Override
+  public Cliente getClient(int id) {
+    Cliente cliente = null;
+    String sql = "SELECT * FROM cliente where id = ?";
+
+    try (
+        Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+      pstmt.setInt(1, id);
+
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (rs.next()) {
+          cliente = new Cliente(
+              rs.getInt("id"),
+              rs.getString("nombre"),
+              rs.getString("apellidos"),
+              rs.getString("dni"),
+              rs.getString("telefono"),
+              Cliente.Categoria.valueOf(rs.getString("categoria")));
+        }
+      }
+
+    } catch (SQLException e) {
+      System.err.println("Error al obtener cliente por ID: " + e.getMessage());
+      e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+      System.err.println("Error de mapeo de categoría (Enum): " + e.getMessage());
+      e.printStackTrace();
+    }
+    if (cliente == null) {
+      System.err.println("Se ha devuelto null");
+    }
+    return cliente;
+  }
+
+  @Override
+  public Cliente[] getAllClient() {
     String sql = "SELECT * FROM cliente";
     List<Cliente> clientes = new ArrayList<>();
 
     try (
         Connection conn = BaseDatos.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
-      ){
+        ResultSet rs = stmt.executeQuery();) {
       while (rs.next()) {
         Cliente cliente = new Cliente(
             rs.getInt("id"),
@@ -60,62 +200,44 @@ public class IClienteImpl implements ICliente {
             rs.getString("apellidos"),
             rs.getString("dni"),
             rs.getString("telefono"),
-            Cliente.Categoria.valueOf(rs.getString("categoria"))
-        );
+            Cliente.Categoria.valueOf(rs.getString("categoria")));
         clientes.add(cliente);
       }
 
-    } catch (SQLException e) { 
-        System.err.println("Error al listar todos los clientes: " + e.getMessage());
-        e.printStackTrace();
+    } catch (SQLException e) {
+      System.err.println("Error al listar todos los clientes: " + e.getMessage());
+      e.printStackTrace();
     } catch (IllegalArgumentException e) {
-        System.err.println("Error de mapeo de categoría (Enum): " + e.getMessage());
-        e.printStackTrace();
+      System.err.println("Error de mapeo de categoría (Enum): " + e.getMessage());
+      e.printStackTrace();
     }
     return clientes.toArray(new Cliente[0]);
   }
 
   @Override
-  public boolean validarCliente(String username) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'validarCliente'");
+  public boolean confirmClient(String username, String password) {
+    String sql = "SELECT COUNT(*) FROM cliente WHERE nombre = ? AND password = ?";
+    boolean confirmado = false;
+
+    try (
+      Connection conn = BaseDatos.conectar();
+      PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, username);
+      pstmt.setString(2, password);
+
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (rs.next()) {
+          confirmado = rs.getInt(1) > 0;
+        }
+      }
+
+    } catch (SQLException e) {
+      System.err.println("Error al confirmar cliente (Login): " + e.getMessage());
+      e.printStackTrace();
+    }
+
+    return confirmado;
   }
-  // @Override
-  // public Cliente[] listarAllClientes() {
-  //   String sql = "SELECT * FROM cliente";
-  //   ArrayList<Cliente> clientes = new ArrayList<>();
-
-  //   try (
-  //       Connection conn = BaseDatos.conectar();
-  //       java.sql.Statement stmt = conn.createStatement();
-  //       java.sql.ResultSet rs = stmt.executeQuery(sql);
-  //     ){
-  //     while (rs.next()) {
-  //       Cliente cliente = new Cliente(
-  //           rs.getInt("id"),
-  //           rs.getString("dni"),
-  //           rs.getString("nombre"),
-  //           rs.getString("apellidos"),
-  //           rs.getString("telefono"),
-  //           Cliente.Categoria.valueOf(rs.getString("categoria"))
-  //       );
-  //       clientes.add(cliente);
-  //     }
-
-  //   } catch (SQLException e) { 
-  //       System.err.println("Error al listar todos los clientes: " + e.getMessage());
-  //       e.printStackTrace();
-  //   } catch (IllegalArgumentException e) {
-  //       System.err.println("Error de mapeo de categoría (Enum): " + e.getMessage());
-  //       e.printStackTrace();
-  //   }
-  //   return clientes.toArray(new Cliente[0]);
-  // }
-
-  // @Override
-  // public boolean validarCliente(String username) {
-  //   // TODO Auto-generated method stub
-  //   throw new UnsupportedOperationException("Unimplemented method 'validarCliente'");
-  // }
 
 }

@@ -4,7 +4,6 @@
 
 package com.mycompany.videoclub;
 
-import com.mycompany.videoclub.DAO.AppTest;
 import com.mycompany.videoclub.DAO.BaseDatos; // 💡 Importa la clase de utilidad
 
 /**

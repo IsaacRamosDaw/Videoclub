@@ -11,16 +11,20 @@ import com.mycompany.videoclub.Modelos.Cliente;
  * @author isaac
  */
 public interface ICliente {
-  public boolean agregarCliente(Cliente u);
+  public boolean createClient(String nombre, String apellidos, String dni, String telefono);
 
-  public String eliminarCliente(Integer id);
+  public String deleteClient(Integer id);
 
-  public boolean actualizarCliente(Integer id, Cliente u);
+  public boolean updateClient(Integer id, String username, String apellidos, String dni, String telefono);
 
-  public Cliente listarClientes(String username);
+  public boolean updateCategory(Integer id, String categoria);
 
-  public Cliente[] listarAllClientes();
+  public Cliente getClient(String username);
 
-  public boolean validarCliente(String username);
+  public Cliente getClient(int id);
+
+  public Cliente[] getAllClient();
+
+  public boolean confirmClient(String username, String password);
 
 }

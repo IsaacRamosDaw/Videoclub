@@ -20,15 +20,14 @@ public class Cliente {
     this.id = id;
     this.nombre = nombre;
     this.apellidos = apellidos;
-    this.telefono = telefono;
     this.dni = dni;
+    this.telefono = telefono;
     this.categoria = categoria;
   }
 
   public Cliente(String nombre, String apellidos, String dni, String telefono, Categoria categoria ){
     this.nombre = nombre;
     this.apellidos = apellidos;
-    this.telefono = telefono;
     this.dni = dni;
     this.telefono = telefono;
     this.categoria = categoria;
