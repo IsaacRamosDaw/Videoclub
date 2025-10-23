@@ -1,3 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package com.mycompany.videoclub.DAO;
 
 import java.sql.Connection;
@@ -9,7 +14,10 @@ import java.util.List;
 
 import com.mycompany.videoclub.DAO.Interfaces.IPelicula;
 import com.mycompany.videoclub.Modelos.Pelicula;
-
+/**
+ *
+ * @author isaac
+ */
 public class IPeliculaImpl implements IPelicula {
 
   /**
@@ -186,7 +194,6 @@ public class IPeliculaImpl implements IPelicula {
       System.err.println("Error al listar todas las películas: " + e.getMessage());
       e.printStackTrace();
     }
-    // Devuelve la lista convertida a un array de Pelicula
     return peliculas.toArray(new Pelicula[0]);
   }
 }
