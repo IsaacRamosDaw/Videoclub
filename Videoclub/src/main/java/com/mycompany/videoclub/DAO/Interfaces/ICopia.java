@@ -4,10 +4,20 @@
  */
 package com.mycompany.videoclub.DAO.Interfaces;
 
+import com.mycompany.videoclub.Modelos.Copia;
+
 /**
  *
  * @author isaac
  */
 public interface ICopia {
-    
+  public boolean createCopia();
+
+  public String deleteCopia();
+
+  public boolean updateCopia();
+
+  public Copia getCopia();
+
+  public Copia[] getAllCopia();
 }

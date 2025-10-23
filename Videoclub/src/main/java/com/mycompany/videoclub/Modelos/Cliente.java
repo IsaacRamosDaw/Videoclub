@@ -7,6 +7,15 @@ package com.mycompany.videoclub.Modelos;
 /**
  *
  * @author isaac
+
+  CREATE TABLE cliente (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    dni VARCHAR(15) UNIQUE NOT NULL, 
+    telefono VARCHAR(20),
+    categoria VARCHAR(20) NOT NULL
+  ;
  */
 public class Cliente {
   private Integer id;
@@ -16,7 +25,7 @@ public class Cliente {
   private String telefono;
   private Categoria categoria;
 
-  public Cliente(Integer id, String nombre, String apellidos, String dni, String telefono, Categoria categoria ){
+  public Cliente(Integer id, String nombre, String apellidos, String dni, String telefono, Categoria categoria){
     this.id = id;
     this.nombre = nombre;
     this.apellidos = apellidos;
