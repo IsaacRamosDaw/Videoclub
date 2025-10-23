@@ -191,17 +191,19 @@ public class IClienteImpl implements ICliente {
 
     try (
         Connection conn = BaseDatos.conectar();
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();) {
-      while (rs.next()) {
-        Cliente cliente = new Cliente(
-            rs.getInt("id"),
-            rs.getString("nombre"),
-            rs.getString("apellidos"),
-            rs.getString("dni"),
-            rs.getString("telefono"),
-            Cliente.Categoria.valueOf(rs.getString("categoria")));
-        clientes.add(cliente);
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      try (ResultSet rs = pstmt.executeQuery()) {
+        while (rs.next()) {
+          Cliente cliente = new Cliente(
+              rs.getInt("id"),
+              rs.getString("nombre"),
+              rs.getString("apellidos"),
+              rs.getString("dni"),
+              rs.getString("telefono"),
+              Cliente.Categoria.valueOf(rs.getString("categoria")));
+          clientes.add(cliente);
+        }
       }
 
     } catch (SQLException e) {
@@ -220,8 +222,8 @@ public class IClienteImpl implements ICliente {
     boolean confirmado = false;
 
     try (
-      Connection conn = BaseDatos.conectar();
-      PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
       pstmt.setString(1, username);
       pstmt.setString(2, password);

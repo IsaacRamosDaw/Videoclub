@@ -28,6 +28,7 @@ public class ClienteUpdateTest {
 
     try {
       Cliente clienteAntes = clienteDAO.getClient(ID);
+      //! Opcional, solo para ver los datos antes y después 
       if (clienteAntes != null) {
         System.out.println("\n--- ESTADO ANTERIOR ---");
         System.out.println("Nombre: " + clienteAntes.getNombre() + " | DNI: " + clienteAntes.getDni());
