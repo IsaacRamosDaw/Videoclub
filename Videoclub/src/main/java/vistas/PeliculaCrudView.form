@@ -139,49 +139,31 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="idInput">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Id"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idInputActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="nombreInput">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreInputActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="directorInput">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="director"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="directorInputActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="generoInput">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="G&#xe9;nero"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generoInputActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="fechaInput">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha Lanzamiento"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fechaInputActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="cantidadInput">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="0"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cantidadInputActionPerformed"/>
           </Events>
