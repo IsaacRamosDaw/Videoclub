@@ -11,8 +11,8 @@ package com.mycompany.videoclub.Modelos;
       id INT PRIMARY KEY AUTO_INCREMENT,
       nombre VARCHAR(150) NOT NULL,
       director VARCHAR(100) NOT NULL,
-      lanzamiento VARCHAR(10) NOT NULL,
       genero VARCHAR(50),
+      lanzamiento VARCHAR(10) NOT NULL,
       cantidad INT NOT NULL DEFAULT 0
     );
  */

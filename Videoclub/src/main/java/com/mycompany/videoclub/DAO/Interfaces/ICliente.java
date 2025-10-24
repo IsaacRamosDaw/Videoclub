@@ -15,6 +15,8 @@ public interface ICliente {
 
   public String deleteClient(Integer id);
 
+  public boolean deleteClient(int id) throws Exception;
+
   public boolean updateClient(Integer id, String username, String apellidos, String dni, String telefono);
 
   public boolean updateCategory(Integer id, String categoria);

@@ -67,6 +67,36 @@ public class IClienteImpl implements ICliente {
   }
 
   @Override
+  public boolean deleteClient(int id) throws Exception {
+    String sql = "DELETE FROM cliente WHERE id = ?";
+
+    // Si tu DAO lanza solo 'SQLException', cambia 'throws Exception' por 'throws
+    // SQLException'
+    try (Connection conn = BaseDatos.conectar();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      // 1. Establecer el parámetro ID
+      pstmt.setInt(1, id);
+
+      // 2. Ejecutar la sentencia DELETE
+      int filasAfectadas = pstmt.executeUpdate();
+
+      // 3. Devolver true si se eliminó al menos una fila (el cliente)
+      return filasAfectadas > 0;
+
+    } catch (SQLException e) {
+      // En caso de error de BD, imprimimos el error y lanzamos una excepción
+      // para que la vista (ClientCrudViewGood) pueda manejarla.
+      System.err.println("Error al eliminar cliente: " + e.getMessage());
+      e.printStackTrace();
+
+      // Es mejor relanzar la excepción para que la capa superior (la vista)
+      // pueda mostrar un JOptionPane al usuario.
+      throw new Exception("Fallo al eliminar el cliente: " + e.getMessage(), e);
+    }
+  }
+
+  @Override
   public boolean updateClient(Integer id, String username, String apellidos, String dni, String telefono) {
     String sql = "UPDATE cliente SET nombre = ?, apellidos = ?, dni = ?, telefono = ? WHERE id = ?";
 

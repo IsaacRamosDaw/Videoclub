@@ -12,7 +12,9 @@ import com.mycompany.videoclub.Modelos.Pelicula;
 public interface IPelicula {
   public boolean createPelicula(String nombre, String director, String lanzamiento, String genero, int cantidad);
 
-  public String deletePelicula(int id);
+  public String deletePelicula(Integer id);
+
+  public boolean deletePeliculaById(int id) throws Exception;
 
   public boolean updatePelicula(int id, String nombre, String director, String lanzamiento, String genero, int cantidad);
 
